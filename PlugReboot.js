@@ -16,7 +16,7 @@ let CONFIG = {
   //time in seconds for the relay to be off
   toggleTime: 5,
   //time in seconds to retry a "ping"
-  pingTime: 5,
+  pingTime: 60,
 };
 
 let endpointIdx = 0;
