@@ -6,6 +6,8 @@ let CONFIG = {
   endpoints: [
     "http://10.0.60.12",
     "http://10.0.60.13",
+    "http://mqtt.ldplxnet:18083/",
+    
   ],
   //number of failures that trigger the reset
   numberOfFails: 5,
@@ -14,7 +16,7 @@ let CONFIG = {
   //time in seconds for the relay to be off
   toggleTime: 5,
   //time in seconds to retry a "ping"
-  pingTime: 60,
+  pingTime: 5,
 };
 
 let endpointIdx = 0;
@@ -28,13 +30,17 @@ function pingEndpoints() {
     function (response, error_code, error_message) {
       //http timeout, magic number, not yet documented
       if (error_code === -114 || error_code === -104) {
-        print("Failed to fetch ", CONFIG.endpoints[endpointIdx]);
+        print(CONFIG.endpoints[endpointIdx])
+        print(error_code)
+        //print("Failed to fetch ", CONFIG.endpoints[endpointIdx]);
         failCounter++;
         print("Rotating through endpoints");
         endpointIdx++;
         endpointIdx = endpointIdx % CONFIG.endpoints.length;
       } else {
-        print("Ping Sucessful")
+        //print(CONFIG.endpoints[endpointIdx])
+        //print(error_code)
+        //print("Ping Sucessful")
         failCounter = 0;
       }
 
